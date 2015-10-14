@@ -26,6 +26,7 @@ Functional programming code is dense, so I tried my best to explain it in detail
 ##### Description:
 `partToTrack` takes a list of Atoms and returns a list of Tracks.
 
+* An `Atom` is a list of notes of variable size.
 * A `Track` is a list of Messages which signal the midi player to perform an action (such as play a note).
 * The midi executes the list of Tracks in parallel (so it can execute two messages simultaniously).
 
