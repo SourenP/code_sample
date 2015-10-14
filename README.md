@@ -57,8 +57,8 @@ Atoms
 To this:
 ``` haskell
 Tracks
-[["Play A", "Play B", "Play C", "Track End"]
- ["Play -", "Play E", "Play D", "Track End"]
+[["Play A", "Play B", "Play C", "Track End"],
+ ["Play -", "Play E", "Play D", "Track End"],
  ["Play -", "Play F", "Play -", "Track End"]]
 ```
 
@@ -91,23 +91,23 @@ The container would be passed down like so:
  []]
 ```
 ```haskell
-[["Play A"]
- ["Play -"]
+[["Play A"],
+ ["Play -"],
  ["Play -"]]
 ```
 ```haskell
-[["Play A", "Play B"]
- ["Play -", "Play E"]
+[["Play A", "Play B"],
+ ["Play -", "Play E"],
  ["Play -", "Play F"]]
 ```
 ```haskell
-[["Play A", "Play B", "Play C"]
- ["Play -", "Play E", "Play D"]
+[["Play A", "Play B", "Play C"],
+ ["Play -", "Play E", "Play D"],
  ["Play -", "Play F", "Play -"]]
 ```
 ```haskell
-[["Play A", "Play B", "Play C", "Track End"]
- ["Play -", "Play E", "Play D", "Track End"]
+[["Play A", "Play B", "Play C", "Track End"],
+ ["Play -", "Play E", "Play D", "Track End"],
  ["Play -", "Play F", "Play -", "Track End"]]
 ```
 
