@@ -50,7 +50,7 @@ partToTrackHelp container (x:xs)
 ``` haskell
 Atoms                     Tracks
 [[A],                     [["Play A", "Play B", "Play C", "Track End"],
- [B, E, F]   -->           ["Play -", "Play E", "Play D", "Track End"],
+ [B, E, F]                 ["Play -", "Play E", "Play D", "Track End"],
  [C, D]]                   ["Play -", "Play F", "Play -", "Track End"]]
 ```
 
@@ -65,8 +65,11 @@ It recursively does this:
 If the head Atom is empty then return a list of "Track End" messages. (base case)
 
  Otherwise:
+
 1. Take the head Atom of the list and converts it into a list of messages with padding ("Play -").
+
 2. Concatenate the converted Atom onto the container.
+
 3. Recursively call `partToTrackHelp` with the tail of the list
 
 So with the example input above, the recursion would go to depth four.
@@ -95,8 +98,13 @@ The container would be passed down like so:
 ```
 
 The MIDI would  have three tracks (rows)
+
 And it would play the music by going through the columns:
+
 1. Play A, nothing, and nothing
+
 2. Play B, E and F
+
 3. Play C, D and nothing
+
 4. End
