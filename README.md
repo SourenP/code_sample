@@ -28,7 +28,7 @@ Functional programming code is dense, so I tried my best to explain it in detail
 
 * A `Track` is a `(Tick, Message)` tuple which signals the midi player to execute `Message`
   * An example of a `Message` is "Play note A".
-* There is a list of `Tracks` because you can execute two messages at once (such as playing two notes at once).
+* The midi executes the list of Tracks in parallel (so it can play two notes at once).
 
 ##### Code
 ``` haskell
@@ -47,26 +47,36 @@ partToTrackHelp container (x:xs)
 ##### Explanation
 
 `partToTrack` essentially takes a list of Atoms, converts them to Messages and transposes them vertically.
+
+It converts this:
 ``` haskell
-Atoms                     Tracks
-[[A],                     [["Play A", "Play B", "Play C", "Track End"],
- [B, E, F]                 ["Play -", "Play E", "Play D", "Track End"],
- [C, D]]                   ["Play -", "Play F", "Play -", "Track End"]]
+Atoms
+[[A],
+ [B, E, F],
+ [C, D]]
+```
+To this:
+``` haskell
+Tracks
+[["Play A", "Play B", "Play C", "Track End"]
+ ["Play -", "Play E", "Play D", "Track End"]
+ ["Play -", "Play F", "Play -", "Track End"]]
 ```
 
-First it gets the size of the largest Atom to determine what size matrix it should create for Tracks.
-In the example above this would be three.
+First it gets the size of the largest Atom to determine the number of rows the matrix for Tracks should be.
+(In the example above the row count is three)
+
 And it passes the list of Atoms and an empty matrix with the appropriate size to `partToTrackHelp`.
 
 `partToTrackHelp` takes the empty container and the list of Atoms and returns a list of Tracks.
 
-It recursively does this:
+In order to create Tracks it does these steps:
 
 If the head Atom is empty then return a list of "Track End" messages. (base case)
 
- Otherwise:
+Otherwise:
 
-1. Take the head Atom of the list and converts it into a list of messages with padding ("Play -").
+1. Take the head Atom of the list and convert it into a list of messages with padding ("Play -").
 
 2. Concatenate the converted Atom onto the container.
 
