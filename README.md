@@ -48,14 +48,14 @@ partToTrackHelp container (x:xs)
 `partToTrack` essentially takes a list of Atoms, converts them to Messages and transposes them vertically.
 
 It converts this:
-``` haskell
+```
 Atoms
 [[A],
  [B, E, F],
  [C, D]]
 ```
 To this:
-``` haskell
+```
 Tracks
 [["Play A", "Play B", "Play C", "Track End"],
  ["Play -", "Play E", "Play D", "Track End"],
@@ -85,27 +85,27 @@ So with the example input above, the recursion would go to depth four.
 
 The container would be passed down like so:
 
-```haskell
+```
 [[]
  []
  []]
 ```
-```haskell
+```
 [["Play A"],
  ["Play -"],
  ["Play -"]]
 ```
-```haskell
+```
 [["Play A", "Play B"],
  ["Play -", "Play E"],
  ["Play -", "Play F"]]
 ```
-```haskell
+```
 [["Play A", "Play B", "Play C"],
  ["Play -", "Play E", "Play D"],
  ["Play -", "Play F", "Play -"]]
 ```
-```haskell
+```
 [["Play A", "Play B", "Play C", "Track End"],
  ["Play -", "Play E", "Play D", "Track End"],
  ["Play -", "Play F", "Play -", "Track End"]]
