@@ -1,4 +1,4 @@
-Last year I designed and implemented a programming language from scratch called Apollo with a team of five.
+Last year we designed and implemented a programming language called Apollo with a team of five.
 
 #### Description of the project
 Apollo is a functional programming language for algorithmic and musical composition.
@@ -10,25 +10,24 @@ Although it was for a class, I decided to share this example because I am very p
 We put much more work into the project than the class required and spent months designing and implementing it.
 
 In addition to that, we wrote Apollo in Haskell, which in my opinion is a very beautiful language.
-It makes you really think about what you're coding and there are often very elegant and short ways to get what you want.
+It makes you really think about what you're coding and you often write very elegant and concise code.
 
 #### Code sample
 Since it was such a large project, we all had to design and write different parts that worked together.
 One of the tasks was to tie the data structures representing a musical piece in the language with a MIDI library in order to output a MIDI file.
 I wrote `midi.hs` - a mini library that converts `Music` (our data type) into a MIDI file.
 
-What I wanted to explain in more detail is how one of the helper functions `partToTrack` works.
+What I want to explain in more detail is how one of the helper functions, `partToTrack` works.
 
 Functional programming code is dense, so I tried my best to explain it in detail.
 
 #### partToTrack:
 
 ##### Description:
-`partToTrack` takes a list of `Atom`s and returns a list of `Track`s.
+`partToTrack` takes a list of Atoms and returns a list of Tracks.
 
-* A `Track` is a `(Tick, Message)` tuple which signals the midi player to execute `Message`
-  * An example of a `Message` is "Play note A".
-* The midi executes the list of Tracks in parallel (so it can play two notes at once).
+* A `Track` is a list of Messages which signal the midi player to perform an action (such as play a note).
+* The midi executes the list of Tracks in parallel (so it can execute two messages simultaniously).
 
 ##### Code
 ``` haskell
@@ -66,11 +65,11 @@ Tracks
 First it gets the size of the largest Atom to determine the number of rows the matrix for Tracks should be.
 (In the example above the row count is three)
 
-And it passes the list of Atoms and an empty matrix with the appropriate size to `partToTrackHelp`.
+Then it passes the list of Atoms and an empty matrix with the appropriate size to `partToTrackHelp`.
 
-`partToTrackHelp` takes the empty container and the list of Atoms and returns a list of Tracks.
+`partToTrackHelp` takes the empty container and the list of Atoms and returns a list of corresponding Tracks.
 
-In order to create Tracks it does these steps:
+In order to create Tracks it goes through these:
 
 If the head Atom is empty then return a list of "Track End" messages. (base case)
 
@@ -86,6 +85,11 @@ So with the example input above, the recursion would go to depth four.
 
 The container would be passed down like so:
 
+```haskell
+[[]
+ []
+ []]
+```
 ```haskell
 [["Play A"]
  ["Play -"]
